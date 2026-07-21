@@ -1,0 +1,782 @@
+{
+  "info": {
+    "name": "CPAAS Backend API",
+    "_postman_id": "cpaas-backend-collection",
+    "description": "Complete API collection for CPAAS Backend. Set the `auth_token` variable after login to access protected routes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Sign In",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "if (json.data && json.data.token) {",
+                  "    pm.collectionVariables.set('auth_token', json.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"admin\",\n  \"password\": \"Admin@123\",\n  \"roleIds\": \"\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/signin", "host": ["{{base_url}}"], "path": ["auth", "signin"] }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"userName\": \"johndoe\",\n  \"password\": \"Password@123\",\n  \"email\": \"john@example.com\",\n  \"phoneNo\": \"9876543210\",\n  \"roleIds\": [\"<role_id>\"],\n  \"tradeId\": [\"<trade_id>\"]\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/createUser", "host": ["{{base_url}}"], "path": ["auth", "createUser"] }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/auth/getUsers?page=1&limit=10&text=",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "getUsers"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "text", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"johndoe\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/password/forgot", "host": ["{{base_url}}"], "path": ["auth", "password", "forgot"] }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userName\": \"johndoe\",\n  \"otp\": \"1234\",\n  \"newPassword\": \"NewPassword@123\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/password/reset", "host": ["{{base_url}}"], "path": ["auth", "password", "reset"] }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"OldPassword@123\",\n  \"newPassword\": \"NewPassword@123\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/password/change", "host": ["{{base_url}}"], "path": ["auth", "password", "change"] }
+          }
+        },
+        {
+          "name": "Generate OTP",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userIdentifier\": \"johndoe\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/otp/generate", "host": ["{{base_url}}"], "path": ["auth", "otp", "generate"] }
+          }
+        },
+        {
+          "name": "Resend OTP",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userIdentifier\": \"johndoe\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/otp/resend", "host": ["{{base_url}}"], "path": ["auth", "otp", "resend"] }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userIdentifier\": \"johndoe\",\n  \"otp\": \"1234\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/auth/otp/verify", "host": ["{{base_url}}"], "path": ["auth", "otp", "verify"] }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/auth/token/refresh", "host": ["{{base_url}}"], "path": ["auth", "token", "refresh"] }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": { "raw": "{{base_url}}/auth/logout", "host": ["{{base_url}}"], "path": ["auth", "logout"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Update User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<user_id>\",\n  \"name\": \"John Doe Updated\",\n  \"userName\": \"johndoe\",\n  \"email\": \"john@example.com\",\n  \"phoneNo\": \"9876543210\",\n  \"roleIds\": [\"<role_id>\"],\n  \"tradeId\": [\"<trade_id>\"],\n  \"password\": \"\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/user/updateUser", "host": ["{{base_url}}"], "path": ["user", "updateUser"] }
+          }
+        },
+        {
+          "name": "Get User By ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/user/getUserById/:id", "host": ["{{base_url}}"], "path": ["user", "getUserById", ":id"], "variable": [{ "key": "id", "value": "<user_id>" }] }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/user/deleteUser/:id", "host": ["{{base_url}}"], "path": ["user", "deleteUser", ":id"], "variable": [{ "key": "id", "value": "<user_id>" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Master",
+      "item": [
+        {
+          "name": "Get Roles",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/master/getRoles", "host": ["{{base_url}}"], "path": ["master", "getRoles"] }
+          }
+        },
+        {
+          "name": "Get Trades",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/master/getTrades", "host": ["{{base_url}}"], "path": ["master", "getTrades"] }
+          }
+        },
+        {
+          "name": "Get Permissions",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/master/getPermission", "host": ["{{base_url}}"], "path": ["master", "getPermission"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Course",
+      "item": [
+        {
+          "name": "Create Course",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courseName\": \"Course 2024 Batch 1\",\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2024-06-30\",\n  \"tradeId\": [\"<trade_id>\"]\n}"
+            },
+            "url": { "raw": "{{base_url}}/course/createCourse", "host": ["{{base_url}}"], "path": ["course", "createCourse"] }
+          }
+        },
+        {
+          "name": "Get Courses (Paginated)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/course/getCourses?page=1&limit=10&text=",
+              "host": ["{{base_url}}"],
+              "path": ["course", "getCourses"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "text", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/course/getCourse", "host": ["{{base_url}}"], "path": ["course", "getCourse"] }
+          }
+        },
+        {
+          "name": "Get Course By ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/course/getCourseById/:id", "host": ["{{base_url}}"], "path": ["course", "getCourseById", ":id"], "variable": [{ "key": "id", "value": "<course_id>" }] }
+          }
+        },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"courseId\": \"<course_id>\",\n  \"courseName\": \"Course 2024 Batch 1 Updated\",\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2024-12-31\",\n  \"tradeId\": [\"<trade_id>\"]\n}"
+            },
+            "url": { "raw": "{{base_url}}/course/updateCourse", "host": ["{{base_url}}"], "path": ["course", "updateCourse"] }
+          }
+        },
+        {
+          "name": "Delete Course",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/course/deleteCourse/:id", "host": ["{{base_url}}"], "path": ["course", "deleteCourse", ":id"], "variable": [{ "key": "id", "value": "<course_id>" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Agniveer",
+      "item": [
+        {
+          "name": "Create Agniveer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Raj Kumar\",\n  \"armyNumber\": \"10012345\",\n  \"rank\": \"Agniveer\",\n  \"tradeId\": [\"<trade_id>\"],\n  \"squadNumber\": 1,\n  \"civilEdn\": \"12th Pass\",\n  \"anyOtherQualification\": \"ITI\",\n  \"fatherName\": \"Ram Kumar\",\n  \"contactNumber\": \"9876543210\",\n  \"address\": \"Village XYZ, District ABC, State\",\n  \"unit\": \"102 Regiment\",\n  \"courseName\": [\"<course_id>\"]\n}"
+            },
+            "url": { "raw": "{{base_url}}/agniveer/createAgniveer", "host": ["{{base_url}}"], "path": ["agniveer", "createAgniveer"] }
+          }
+        },
+        {
+          "name": "Get Agniveers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/agniveer/getAgniveers?page=1&limit=10&text=&filter=&courseName=&squadNumber=&tradeId=&grade=&armyNumber=",
+              "host": ["{{base_url}}"],
+              "path": ["agniveer", "getAgniveers"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" },
+                { "key": "text", "value": "" },
+                { "key": "filter", "value": "" },
+                { "key": "courseName", "value": "" },
+                { "key": "squadNumber", "value": "" },
+                { "key": "tradeId", "value": "" },
+                { "key": "grade", "value": "" },
+                { "key": "armyNumber", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Agniveer By ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/agniveer/getAgniveerById/:id", "host": ["{{base_url}}"], "path": ["agniveer", "getAgniveerById", ":id"], "variable": [{ "key": "id", "value": "<agniveer_id>" }] }
+          }
+        },
+        {
+          "name": "Update Agniveer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agniveerId\": \"<agniveer_id>\",\n  \"name\": \"Raj Kumar Updated\",\n  \"armyNumber\": \"10012345\",\n  \"rank\": \"Agniveer\",\n  \"tradeId\": [\"<trade_id>\"],\n  \"squadNumber\": 1,\n  \"civilEdn\": \"12th Pass\",\n  \"anyOtherQualification\": \"ITI\",\n  \"fatherName\": \"Ram Kumar\",\n  \"contactNumber\": \"9876543210\",\n  \"address\": \"Village XYZ, District ABC, State\",\n  \"unit\": \"102 Regiment\",\n  \"courseName\": [\"<course_id>\"]\n}"
+            },
+            "url": { "raw": "{{base_url}}/agniveer/updateAgniveer", "host": ["{{base_url}}"], "path": ["agniveer", "updateAgniveer"] }
+          }
+        },
+        {
+          "name": "Delete Agniveer",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/agniveer/deleteAgniveer/:id", "host": ["{{base_url}}"], "path": ["agniveer", "deleteAgniveer", ":id"], "variable": [{ "key": "id", "value": "<agniveer_id>" }] }
+          }
+        },
+        {
+          "name": "Get Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/agniveer/getDashboardSummary", "host": ["{{base_url}}"], "path": ["agniveer", "getDashboardSummary"] }
+          }
+        },
+        {
+          "name": "Get Trade Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/agniveer/getTradeDashboardSummary/:id", "host": ["{{base_url}}"], "path": ["agniveer", "getTradeDashboardSummary", ":id"], "variable": [{ "key": "id", "value": "<trade_id>" }] }
+          }
+        },
+        {
+          "name": "Get Grade Report",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/agniveer/getGradeReport", "host": ["{{base_url}}"], "path": ["agniveer", "getGradeReport"] }
+          }
+        },
+        {
+          "name": "Get Individual Report",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/agniveer/getAgniveerIndiviualReport", "host": ["{{base_url}}"], "path": ["agniveer", "getAgniveerIndiviualReport"] }
+          }
+        },
+        {
+          "name": "Export Agniveers (Excel)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/agniveer/export", "host": ["{{base_url}}"], "path": ["agniveer", "export"] }
+          }
+        },
+        {
+          "name": "Import Agniveers (Excel)",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "",
+                  "description": "Excel file (.xlsx or .xls), max 10MB"
+                }
+              ]
+            },
+            "url": { "raw": "{{base_url}}/agniveer/import", "host": ["{{base_url}}"], "path": ["agniveer", "import"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Physical Proficiency",
+      "item": [
+        {
+          "name": "Create Physical Proficiency",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agniveerId\": \"<agniveer_id>\",\n  \"courseId\": \"<course_id>\",\n  \"fiveKmRun\": 4,\n  \"sixtyMeterSprint\": 3,\n  \"horizontalRope\": 4,\n  \"verticalRope\": 4,\n  \"nineFeetDitch\": 4,\n  \"twoPointFourKm\": 3,\n  \"chinUps\": 4,\n  \"toeTouch\": 3,\n  \"sitUps\": 4,\n  \"sprint100m\": 3,\n  \"fiveMeterShuttle\": 4\n}"
+            },
+            "url": { "raw": "{{base_url}}/physcialProficiency/createPhyscialProficiency", "host": ["{{base_url}}"], "path": ["physcialProficiency", "createPhyscialProficiency"] },
+            "description": "Rating values: 1=Fail, 2=Satisfactory, 3=Good, 4=Excellent\nBPET max=20, PPT max=24, Total max=44"
+          }
+        },
+        {
+          "name": "Get Physical Proficiency",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/physcialProficiency/getPhyscialProficiency?agniveerId=<agniveer_id>&courseId=<course_id>",
+              "host": ["{{base_url}}"],
+              "path": ["physcialProficiency", "getPhyscialProficiency"],
+              "query": [
+                { "key": "agniveerId", "value": "<agniveer_id>" },
+                { "key": "courseId", "value": "<course_id>" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Physical Proficiency",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"physcialProficiencyId\": \"<pp_id>\",\n  \"agniveerId\": \"<agniveer_id>\",\n  \"courseId\": \"<course_id>\",\n  \"fiveKmRun\": 4,\n  \"sixtyMeterSprint\": 4,\n  \"horizontalRope\": 4,\n  \"verticalRope\": 4,\n  \"nineFeetDitch\": 4,\n  \"twoPointFourKm\": 4,\n  \"chinUps\": 4,\n  \"toeTouch\": 4,\n  \"sitUps\": 4,\n  \"sprint100m\": 4,\n  \"fiveMeterShuttle\": 4\n}"
+            },
+            "url": { "raw": "{{base_url}}/physcialProficiency/updatePhyscialProficiency", "host": ["{{base_url}}"], "path": ["physcialProficiency", "updatePhyscialProficiency"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fortnight Performance",
+      "item": [
+        {
+          "name": "Create Fortnight Performance",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"agniveerId\": \"<agniveer_id>\",\n  \"courseId\": \"<course_id>\",\n  \"physicalTraining\": { \"score\": 8, \"remark\": \"Good performance\", \"total\": 10 },\n  \"gamesPerformance\": { \"score\": 7, \"remark\": \"Average\", \"total\": 10 },\n  \"motivationLevel\": { \"score\": 9, \"remark\": \"Excellent\", \"total\": 10 },\n  \"militaryBearing\": { \"score\": 8, \"remark\": \"Good\", \"total\": 10 },\n  \"situationalAwareness\": { \"score\": 7, \"remark\": \"Average\", \"total\": 10 },\n  \"classPerformance\": { \"score\": 9, \"remark\": \"Excellent\", \"total\": 10 },\n  \"morale\": { \"score\": 8, \"remark\": \"Good\", \"total\": 10 },\n  \"decisionMaking\": { \"score\": 7, \"remark\": \"Average\", \"total\": 10 },\n  \"resilience\": { \"score\": 9, \"remark\": \"Excellent\", \"total\": 10 },\n  \"integrity\": { \"score\": 10, \"remark\": \"Outstanding\", \"total\": 10 },\n  \"totalFortnightPerformance\": 82\n}"
+            },
+            "url": { "raw": "{{base_url}}/fortnightPerformance/createFortnightPerformance", "host": ["{{base_url}}"], "path": ["fortnightPerformance", "createFortnightPerformance"] },
+            "description": "Each metric has score (0-10), remark (string), total (10). Max total = 100."
+          }
+        },
+        {
+          "name": "Get Fortnight Performance",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/fortnightPerformance/getFortnightPerformance?agniveerId=<agniveer_id>&courseId=<course_id>",
+              "host": ["{{base_url}}"],
+              "path": ["fortnightPerformance", "getFortnightPerformance"],
+              "query": [
+                { "key": "agniveerId", "value": "<agniveer_id>" },
+                { "key": "courseId", "value": "<course_id>" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tech Phases",
+      "item": [
+        {
+          "name": "Gunner Tech Phase",
+          "item": [
+            {
+              "name": "Create Gunner Tech Phase",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agniveerId\": \"<agniveer_id>\",\n  \"courseId\": \"<course_id>\",\n  \"theoretical\": {\n    \"writtenScore\": 40,\n    \"quizScore\": 25,\n    \"theoreticalPercentage\": 82.5,\n    \"theoreticalRank\": 3\n  },\n  \"practical\": {\n    \"pkt\": { \"score\": 18, \"total\": 20 },\n    \"eqptph\": { \"score\": 22, \"total\": 25 },\n    \"gunph\": { \"score\": 28, \"total\": 30 },\n    \"mslph\": { \"score\": 18, \"total\": 20 },\n    \"ims\": { \"score\": 3, \"total\": 4 },\n    \"fdfiring\": { \"score\": 0, \"total\": 0 }\n  },\n  \"totalTheoreticalScore\": 65,\n  \"totalPracticalScore\": 89,\n  \"finalScore\": 154,\n  \"overallPercentage\": 77,\n  \"overallRank\": 5\n}"
+                },
+                "url": { "raw": "{{base_url}}/gunnerTechPhase/createGunnerTechPhase", "host": ["{{base_url}}"], "path": ["gunnerTechPhase", "createGunnerTechPhase"] }
+              }
+            },
+            {
+              "name": "Get Gunner Tech Phase",
+              "request": {
+                "method": "GET",
+                "url": { "raw": "{{base_url}}/gunnerTechPhase/getGunnerTechPhase", "host": ["{{base_url}}"], "path": ["gunnerTechPhase", "getGunnerTechPhase"] }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Driver Tech Phase",
+          "item": [
+            {
+              "name": "Create Driver Tech Phase",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agniveerId\": \"<agniveer_id>\",\n  \"courseId\": \"<course_id>\",\n  \"theoretical\": {\n    \"writtenScore\": 38,\n    \"quizScore\": 22,\n    \"theoreticalPercentage\": 75,\n    \"theoreticalRank\": 4\n  },\n  \"practical\": {\n    \"pkt\": { \"score\": 16, \"total\": 20 },\n    \"eqptph\": { \"score\": 20, \"total\": 25 }\n  },\n  \"totalTheoreticalScore\": 60,\n  \"totalPracticalScore\": 80,\n  \"finalScore\": 140,\n  \"overallPercentage\": 70,\n  \"overallRank\": 6\n}"
+                },
+                "url": { "raw": "{{base_url}}/driverTechPhase/createDriverTechPhase", "host": ["{{base_url}}"], "path": ["driverTechPhase", "createDriverTechPhase"] }
+              }
+            },
+            {
+              "name": "Get Driver Tech Phase",
+              "request": {
+                "method": "GET",
+                "url": { "raw": "{{base_url}}/driverTechPhase/getDriverTechPhase", "host": ["{{base_url}}"], "path": ["driverTechPhase", "getDriverTechPhase"] }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Operator Tech Phase",
+          "item": [
+            {
+              "name": "Create Operator Tech Phase",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agniveerId\": \"<agniveer_id>\",\n  \"courseId\": \"<course_id>\",\n  \"theoretical\": {\n    \"writtenScore\": 42,\n    \"quizScore\": 26,\n    \"theoreticalPercentage\": 85,\n    \"theoreticalRank\": 2\n  },\n  \"practical\": {\n    \"pkt\": { \"score\": 19, \"total\": 20 },\n    \"eqptph\": { \"score\": 23, \"total\": 25 }\n  },\n  \"totalTheoreticalScore\": 68,\n  \"totalPracticalScore\": 92,\n  \"finalScore\": 160,\n  \"overallPercentage\": 80,\n  \"overallRank\": 2\n}"
+                },
+                "url": { "raw": "{{base_url}}/operatorTechPhase/createOperatorTechPhase", "host": ["{{base_url}}"], "path": ["operatorTechPhase", "createOperatorTechPhase"] }
+              }
+            },
+            {
+              "name": "Get Operator Tech Phase",
+              "request": {
+                "method": "GET",
+                "url": { "raw": "{{base_url}}/operatorTechPhase/getOperatorTechPhase", "host": ["{{base_url}}"], "path": ["operatorTechPhase", "getOperatorTechPhase"] }
+              }
+            }
+          ]
+        },
+        {
+          "name": "OFC Tech Phase",
+          "item": [
+            {
+              "name": "Create OFC Tech Phase",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"agniveerId\": \"<agniveer_id>\",\n  \"courseId\": \"<course_id>\",\n  \"theoretical\": {\n    \"writtenScore\": 45,\n    \"quizScore\": 28,\n    \"theoreticalPercentage\": 91,\n    \"theoreticalRank\": 1\n  },\n  \"practical\": {\n    \"pkt\": { \"score\": 20, \"total\": 20 },\n    \"eqptph\": { \"score\": 24, \"total\": 25 }\n  },\n  \"totalTheoreticalScore\": 73,\n  \"totalPracticalScore\": 95,\n  \"finalScore\": 168,\n  \"overallPercentage\": 84,\n  \"overallRank\": 1\n}"
+                },
+                "url": { "raw": "{{base_url}}/ofcTechPhase/createOfcTechPhase", "host": ["{{base_url}}"], "path": ["ofcTechPhase", "createOfcTechPhase"] }
+              }
+            },
+            {
+              "name": "Get OFC Tech Phase",
+              "request": {
+                "method": "GET",
+                "url": { "raw": "{{base_url}}/ofcTechPhase/getOfcTechPhase", "host": ["{{base_url}}"], "path": ["ofcTechPhase", "getOfcTechPhase"] }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "S3 Files",
+      "item": [
+        {
+          "name": "Upload File",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "" }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/s3/upload?type=singlepart",
+              "host": ["{{base_url}}"],
+              "path": ["s3", "upload"],
+              "query": [{ "key": "type", "value": "singlepart", "description": "singlepart or multipart" }]
+            }
+          }
+        },
+        {
+          "name": "Add File Record",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"file_name\": \"document.pdf\",\n  \"file_size\": 1048576,\n  \"s3_path\": \"uploads/document.pdf\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/s3/add", "host": ["{{base_url}}"], "path": ["s3", "add"] }
+          }
+        },
+        {
+          "name": "List Master Files",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/s3/list?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["s3", "list"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List S3 Files",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/s3/s3List", "host": ["{{base_url}}"], "path": ["s3", "s3List"] }
+          }
+        },
+        {
+          "name": "Get File Info",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/s3/getInfo", "host": ["{{base_url}}"], "path": ["s3", "getInfo"] }
+          }
+        },
+        {
+          "name": "Archive File",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"file_id\": \"<file_id>\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/s3/archive", "host": ["{{base_url}}"], "path": ["s3", "archive"] }
+          }
+        },
+        {
+          "name": "Download File",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/s3/download", "host": ["{{base_url}}"], "path": ["s3", "download"] }
+          }
+        },
+        {
+          "name": "Request Download",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"file_id\": \"<file_id>\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/s3/requestDownload", "host": ["{{base_url}}"], "path": ["s3", "requestDownload"] }
+          }
+        },
+        {
+          "name": "Complete Multipart Upload",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uploadId\": \"<upload_id>\",\n  \"parts\": [\n    { \"PartNumber\": 1, \"ETag\": \"<etag>\" }\n  ]\n}"
+            },
+            "url": { "raw": "{{base_url}}/s3/completeMulti", "host": ["{{base_url}}"], "path": ["s3", "completeMulti"] }
+          }
+        },
+        {
+          "name": "Abort Multipart Upload",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uploadId\": \"<upload_id>\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/s3/abortMulti", "host": ["{{base_url}}"], "path": ["s3", "abortMulti"] }
+          }
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/s3/deleteFile", "host": ["{{base_url}}"], "path": ["s3", "deleteFile"] }
+          }
+        },
+        {
+          "name": "Multi Download",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/s3/multiDownload", "host": ["{{base_url}}"], "path": ["s3", "multiDownload"] }
+          }
+        },
+        {
+          "name": "Fetch Download Requests",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/s3/fetchRequests", "host": ["{{base_url}}"], "path": ["s3", "fetchRequests"] }
+          }
+        },
+        {
+          "name": "Get Pending Queue",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/s3/queuePending", "host": ["{{base_url}}"], "path": ["s3", "queuePending"] }
+          }
+        },
+        {
+          "name": "Delete Download Requests",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "DELETE",
+            "url": { "raw": "{{base_url}}/s3/deleteRequests", "host": ["{{base_url}}"], "path": ["s3", "deleteRequests"] }
+          }
+        },
+        {
+          "name": "Test Download",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/s3/testDownload", "host": ["{{base_url}}"], "path": ["s3", "testDownload"] }
+          }
+        }
+      ]
+    }
+  ]
+}

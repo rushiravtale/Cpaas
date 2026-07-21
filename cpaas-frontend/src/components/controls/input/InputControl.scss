@@ -1,0 +1,33 @@
+
+
+.input-control-wrapper {
+  margin-bottom: 16px;
+
+    &.disabled {
+    opacity: 0.6;
+    pointer-events: none; // prevent interaction
+  }
+  .input-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .input-box {
+    padding: 8px 12px;
+    width: 100%;
+    font-family: inherit !important;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    &:focus {
+      border-color: var(--color-primary);
+      outline: none;
+    }
+  }
+}
+.password-toggle-icon {
+  position: absolute;
+  margin-top: 3px;
+}

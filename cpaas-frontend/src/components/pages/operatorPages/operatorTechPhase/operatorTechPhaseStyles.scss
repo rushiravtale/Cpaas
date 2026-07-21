@@ -1,0 +1,319 @@
+.operator-tech-phase-page {
+  padding: 20px;
+  background: #fff;
+  box-sizing: border-box;
+  // height: 100%;
+  box-shadow: 0px 0px 30px 0px #00000033;
+  // overflow-y: auto;
+  border-radius: var(--radius-lg);
+}
+
+
+/* HEADER */
+.operator-tech-phase-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 18px 0px;
+  margin: 0px;
+}
+.operator-tech-phase-back-icon {
+  cursor: pointer;
+  background-color: #d9d9d9;
+  border-radius: 100%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Info card (top) */
+.operator-tech-phase-info-card {
+  background: #eaf7ee;
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.operator-tech-phase-info-left,
+.operator-tech-phase-info-center,
+.operator-tech-phase-info-right {
+  flex: 1;
+}
+.operator-tech-phase-info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.operator-tech-phase-info-label {
+  font-weight: 700;
+  color: #222;
+}
+.operator-tech-phase-info-value {
+  color: #111;
+}
+
+
+/* Controls row */
+.operator-tech-phase-controls-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+.operator-tech-phase-controls-spacer {
+  flex: 1;
+}
+.operator-tech-phase-week-select {
+  width: auto;
+}
+
+
+/* Main card styles */
+.operator-tech-phase-card {
+  background: #f4f7f9;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border-radius: 8px;
+}
+.operator-tech-phase-card-title {
+  margin-top: 0;
+}
+
+
+/* Practical grid */
+.operator-tech-phase-practical-card {
+  margin-bottom: 24px;
+}
+.operator-tech-phase-practical-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+
+/* small cards inside practical grid */
+.operator-tech-phase-small-card {
+  background: #eef3f6;
+  border-radius: 8px;
+  padding: 14px;
+  min-height: 120px;
+}
+.operator-tech-phase-small-card-title {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+.operator-tech-phase-small-card-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+
+/* empty slot card visual - keep minimal */
+.operator-tech-phase-empty-slot {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  padding: 0;
+  min-height: 120px;
+}
+
+
+/* inline numeric labels/inputs */
+.operator-tech-phase-numeric-label {
+  font-size: 13px;
+  font-weight: 500;
+  width: 55%;
+}
+.operator-tech-phase-numeric-input {
+  width: 45%;
+  display: flex;
+  align-items: center;
+}
+.operator-tech-phase-max-inline {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  color: #333;
+  font-size: 13px !important;
+  span,
+  p {
+    font-size: 13px !important;
+    font-weight: 600;
+    margin-left: 2px;
+  }
+}
+
+
+/* Input sizing classes - matches gunner behaviour */
+.operator-tech-phase-input-narrow .input-box {
+  width: 80px;
+}
+.operator-tech-phase-input-narrow {
+  margin-bottom: 0px !important;
+  width: auto;
+}
+.operator-tech-phase-input-inline .input-box {
+  width: 120px;
+}
+
+
+/* Select inline */
+.operator-tech-phase-select-inline {
+  display: flex;
+  flex-direction: column;
+}
+.operator-tech-phase-week-select-control .react-select__control {
+  min-height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+}
+.operator-tech-phase-week-select-control {
+  min-height: 40px;
+  gap: 15px;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+}
+
+
+/* Restrictive Quality (full width card) */
+.operator-tech-phase-restrictive {
+  margin-bottom: 24px;
+}
+.operator-tech-phase-restrictive-input-wrapper {
+  margin-top: 8px;
+}
+.operator-tech-phase-restrictive-textarea {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 8px;
+  border: 1px solid #e0e6ea;
+  padding: 10px 12px;
+  font-size: 14px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+
+/* Submit */
+.operator-tech-phase-submit-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-bottom: 40px;
+}
+.operator-tech-phase-submit-btn {
+  min-width: 110px;
+  background: #4b5e29;
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 0px;
+  font-family: inherit;
+}
+
+
+/* ostp header reused */
+.ostp-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+      font-size: 20px;
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+.ostp-back-icon {
+  cursor: pointer;
+  background-color: #D9D9D9;
+  border-radius: 100%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .operator-tech-phase-practical-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+.operator-tech-phase-theoretical-card {
+  background: #f4f7f9;
+  padding: 18px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.operator-tech-phase-two-col {
+  display: flex;
+  justify-content: flex-start;
+  gap: 50px;
+}
+
+.operator-tech-phase-inline-field {
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.operator-tech-phase-inline-field-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.operator-tech-phase-numeric-label-write,
+.operator-tech-phase-numeric-label-quiz {
+  width: 45%;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.operator-tech-phase-input-inline {
+  width: 120px;
+}
+
+.operator-tech-phase-max-inline-write,
+.operator-tech-phase-max-inline-quiz {
+  display: flex;
+  align-items: center;
+  margin-top: 14px !important;
+  color: #333;
+  font-size: 13px !important;
+
+  span,
+  p {
+    font-size: 13px !important;
+    font-weight: 500;
+    margin-left: 2px;
+  }
+}
+
+.operator-tech-phase-test-row {
+  margin-bottom: 24px;
+}
+

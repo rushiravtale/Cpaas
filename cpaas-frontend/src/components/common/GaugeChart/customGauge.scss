@@ -1,0 +1,54 @@
+.custom-gauge-wrapper {
+  position: relative;
+  height: 110px;
+  margin: 0 auto;
+  margin-top: -15px;
+}
+
+.gauge-center-value {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.gauge-value-text {
+  font-size: 12px;
+  color: #111;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.gauge-labels {
+  position: absolute;
+  bottom: -1px;
+  gap:30px;
+  left: 0;
+  margin-left: -30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;  
+  padding: 0 6px;
+  font-size: 12px;
+  color: #444;
+}
+
+.label-left {
+  text-align: left;
+}
+
+.label-center {
+  margin-left: 8px;
+  text-align: right;
+}
+
+.label-right {
+  text-align: right;
+  margin-left: -15px;
+}
+
+.css-xomkm4-MuiGauge-valueArc {
+  color: #715306 !important;
+}

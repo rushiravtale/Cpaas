@@ -1,0 +1,3 @@
+export const LOAD_WEEKLY_PERFORMANCE = "weeklyPerformace/LOAD_WEEKLY_PERFORMANCE";
+export const SET_WEEKLY_PERFORMANCE = "weeklyPerformace/SET_WEEKLY_PERFORMANCE";
+export const SAVE_WEEKLY_PERFORMANCE = "weeklyPerformace/SAVE_WEEKLY_PERFORMANCE";

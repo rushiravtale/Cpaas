@@ -1,0 +1,115 @@
+.sidebar-container {
+  background-color: var(--sidebar-bg);
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  min-width: 200px;
+  border-radius: var(--radius-lg);
+  color: var(--color-white);
+}
+.logo-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 0.12;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+.logo-section h1 {
+  font-size: 40;
+  margin: 0px !important;
+  font-weight: 700;
+}
+.logo-section p {
+  font-size: 8px;
+  margin-top: 0px !important;
+  width: 75%;
+  line-height: 1.1;
+}
+.user-section {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  background: #8a8e69;
+  width: 75%;
+  padding: 6px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.user-profile-info-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  justify-content: center;
+  align-items: center;
+}
+.user-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.user-info .user-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px !important;
+}
+.user-info .user-role {
+  font-size: 10px;
+  opacity: 0.7;
+  height: 5px;
+  margin-top: 0px !important;
+}
+.tabs-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  flex: 0.9;
+  margin-top: 5px;
+}
+.tab-item {
+  position: relative;
+  padding: 12px 20px;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  color: var(--color-white);
+  text-decoration: none !important;
+  font-weight: 600;
+}
+.active-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 6px;
+  background: #ffd900;
+}
+.logout-section {
+  display: flex;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--color-white);
+  text-align: left;
+}
+.logout-text {
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+

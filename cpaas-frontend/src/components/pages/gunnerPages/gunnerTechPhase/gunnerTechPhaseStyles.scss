@@ -1,0 +1,247 @@
+.gunner-tech-phase-page {
+  padding: 20px;
+
+
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 30px 0px #00000033;
+  border-radius: var(--radius-lg);
+}
+.gunner-tech-phase-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 18px 0px;
+  margin: 0px;
+}
+.gunner-tech-phase-back-icon {
+  cursor: pointer;
+  background-color: #d9d9d9;
+  border-radius: 100%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* INFO CARD */
+.gunner-tech-phase-info-card {
+  background: #eaf7ee;
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.gunner-tech-phase-info-left,
+.gunner-tech-phase-info-center,
+.gunner-tech-phase-info-right {
+  flex: 1;
+}
+.gunner-tech-phase-info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+.gunner-tech-phase-info-label {
+  font-weight: 700;
+  color: #222;
+}
+.gunner-tech-phase-info-value {
+  color: #111;
+}
+/* CONTROLS */
+.gunner-tech-phase-controls-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+.gunner-tech-phase-controls-spacer {
+  flex: 1;
+}
+.gunner-tech-phase-week-select {
+  width: auto;
+}
+/* TEST ROW */
+.gunner-tech-phase-test-row {
+  // display: grid;
+  // grid-template-columns: 1fr 1fr;
+  // gap: 16px;
+  margin-bottom: 18px;
+}
+.gunner-tech-phase-card {
+  background: #f4f7f9;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  border-radius: 8px;
+}
+.gunner-tech-phase-card-title {
+  margin-top: 0;
+}
+.gunner-tech-phase-two-col {
+  display: flex;
+  justify-content: flex-start !important;
+  gap: 50px !important;
+}
+.gunner-tech-phase-field-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.gunner-tech-phase-input-inline {
+  width: 100%;
+}
+.gunner-tech-phase-inline-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.gunner-tech-phase-inline-field-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.gunner-tech-phase-max-inline,
+.gunner-tech-phase-max-inline-write,
+.gunner-tech-phase-max-inline-quiz {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  color: #333;
+  font-size: 13px !important;
+  span,
+  p {
+    font-size: 13px !important;
+    font-weight: 500;
+    margin-left: 2px;
+  }
+}
+
+
+.gunner-tech-phase-max-inline-write,.gunner-tech-phase-max-inline-quiz
+{
+  margin-top: 14px !important;
+}
+.gunner-tech-phase-numeric-label {
+  font-size: 13px;
+  font-weight: 500;
+  width: 56% !important;
+}
+.gunner-tech-phase-numeric-label-write,
+.gunner-tech-phase-numeric-label-quiz {
+  width: 45%;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.gunner-tech-phase-numeric-input {
+  width: 44%;
+  display: flex;
+  margin-bottom: 0px;
+  align-items: center;
+}
+.gunner-tech-phase-numeric-max {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+.gunner-tech-phase-practical-card {
+  margin-bottom: 24px;
+}
+.gunner-tech-phase-practical-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+.gunner-tech-phase-small-card {
+  background: #eef3f6;
+  border-radius: 8px;
+  padding: 14px;
+}
+.gunner-tech-phase-small-card-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+.gunner-tech-phase-small-card-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.gunner-tech-phase-input-narrow .input-box {
+  width: 80px;
+}
+.gunner-tech-phase-input-narrow {
+  margin-bottom: 0px !important;
+  width: auto;
+}
+.gunner-tech-phase-input-inline .input-box {
+  width: 120px;
+}
+/* SELECT INLINE */
+.gunner-tech-phase-select-inline {
+  display: flex;
+  flex-direction: column;
+}
+.gunner-tech-phase-week-select-control .react-select__control {
+  min-height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+}
+.gunner-tech-phase-week-select-control {
+  min-height: 40px;
+  gap: 15px;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+}
+/* SUBMIT */
+.gunner-tech-phase-submit-row {
+  display: flex;
+  justify-content: center;
+
+
+  margin-top: 8px;
+  margin-bottom: 40px;
+}
+.gunner-tech-phase-submit-btn {
+  min-width: 110px;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+ 
+  background: #4b5e29;
+  color: #fff;
+  padding: 12px 10px;
+}
+
+
+
+
+.gtp-header {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
+ 
+}
+.gtp-back-icon {
+  cursor: pointer;
+  background-color: #d9d9d9;
+  border-radius: 100%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

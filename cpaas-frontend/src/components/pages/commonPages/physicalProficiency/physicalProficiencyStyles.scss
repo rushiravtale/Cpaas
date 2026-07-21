@@ -1,0 +1,159 @@
+.pp-page {
+  padding: 20px;
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 30px 0px #00000033;
+  border-radius: 12px;
+}
+
+
+.pp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    display: flex;
+    gap: 8px;
+
+
+
+
+}
+
+
+
+
+.back-nagivation-wrap
+{
+      display: flex;
+    align-items: center;
+    padding: 0px 8px;
+    background-color: #D9D9D9;
+    border-radius: 25px;
+
+
+
+
+}
+
+
+.pp-back-icon {
+  cursor: pointer;
+  background-color: #d9d9d9;
+  border-radius: 100%;
+  padding: 2px !important;
+  display: flex;
+  align-items: center;
+}
+
+
+/* Info Card */
+.pp-info-card {
+  background: #eaf7ee;
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+
+.pp-info-left,
+.pp-info-center,
+.pp-info-right {
+  flex: 1;
+}
+
+
+.pp-info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+
+.pp-info-label {
+  font-weight: 700;
+  color: #222;
+  font-size: 13px;
+}
+
+
+.pp-info-value {
+  color: #111;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+
+/* Sections */
+.pp-section {
+  margin-bottom: 18px;
+  padding: 10px;
+  border-radius: var(--radius-lg);
+  background-color: #f5f7fa;
+}
+
+
+.pp-section-title {
+  font-size: 16px;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+
+
+.pp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  padding: 10px;
+}
+
+
+.pp-card {
+  background: #e6eaf080;
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.pp-card-title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+
+.pp-submit-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+  margin-bottom: 40px;
+}
+
+
+.pp-submit-btn {
+  min-width: 100px;
+  background: #4b5320;
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 10px;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pp-grid {
+    grid-template-columns: 1fr;
+  }
+  .pp-info-card {
+    flex-direction: column;
+  }
+}

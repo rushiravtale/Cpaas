@@ -1,0 +1,53 @@
+.select-control-wrapper {
+  margin-bottom: 16px;
+
+  .select-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .react-select__control {
+    border-radius: var(--radius-md);
+    border: 1px solid #ddd;
+    box-shadow: none;
+  font-size: 13px !important;
+
+
+    &:hover {
+      border-color: #a0a0a0;
+    }
+  }
+}
+.react-select__indicator-separator {
+  display: none !important;
+}
+.css-1xc3v61-indicatorContainer {
+  color: black !important;
+}
+
+.css-d7l1ni-option{
+  background-color: transparent !important;
+}
+
+.react-select__option--is-selected {
+  background-color: #8a8e69 !important; 
+
+  color: inherit !important;
+}
+
+.react-select__option--is-focused {
+  color: inherit !important;
+}
+
+.react-select__single-value {
+  font-size: 13px !important;
+  color:black;
+}
+
+.react-select__option
+{
+    font-size: 13px !important;
+  color:black;
+}

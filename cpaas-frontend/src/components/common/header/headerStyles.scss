@@ -1,0 +1,19 @@
+.common-header-container {
+  height: 10%;
+
+  display: flex;
+  align-items: center;
+  padding:20px 5px 20px 20px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  margin: 0px 20px 0px 0px;
+
+}
+
+.header-left .active-tab-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  color: black;
+}
+

@@ -1,0 +1,275 @@
+// .fortnightly-sheet {
+//   padding: 20px;
+//   background: #fff;
+//   overflow-y: auto;
+//   height: 100%;
+//   box-shadow: 0px 0px 30px 0px #00000033;
+//   box-sizing: border-box;
+//   border-radius: var(--radius-lg);
+
+//   .fps-header-wrapper {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     margin-bottom: 20px;
+//   }
+
+//   .fps-header {
+//     display: flex;
+//     align-items: center;
+//     gap: 10px;
+//     .fps-back-icon{
+//         font-size: 20px !important;
+//     }
+
+//     h2 {
+//       margin: 0;
+//       font-size: 20px;
+//       font-weight: 600;
+//     }
+//   }
+
+//   .fps-back-icon {
+//     cursor: pointer;
+//     background-color: #d9d9d9;
+//     border-radius: 100%;
+//     padding: 2px;
+//     transition: 0.2s;
+//     &:hover {
+//       background-color: #c0c0c0;
+//     }
+//   }
+
+//   .fortnight-input {
+//     width: 80px !important;
+//     text-align: center;
+//     display: flex;
+
+// justify-content: center; 
+// align-items: center; }
+
+//   .sheet-body {
+//     display: flex;
+//     gap: 36px;
+//     margin-top: 20px;
+//   }
+
+//   .sheet-column {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 24px;
+//   }
+
+//   .sheet-row {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 8px;
+//   }
+
+//   .row-control {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: flex-end;
+//   }
+
+//   .row-label {
+//     font-size: 14px;
+//     font-weight: 500;
+//     color: #111;
+//   }
+
+//   .value-label {
+//     font-weight: 600;
+//     font-size: 13px;
+//     color: #111;
+//   }
+
+//   .rating-text {
+//     font-weight: 600;
+//     color: #555;
+//     font-size: 0.9em;
+//   }
+
+//   .sheet-footer {
+//     display: flex;
+//     justify-content: center;
+//     margin-top: 40px;
+//   }
+
+//   .submit-btn {
+//     background: var(--color-primary);
+//     color: white;
+//     width: auto !important;
+//     border: none;
+//     padding: 12px 32px;
+//     border-radius: 8px;
+//     font-size: 15px;
+//     font-weight: 600;
+//     cursor: pointer;
+//     transition: 0.2s;
+
+//     &:hover {
+//       opacity: 0.9;
+//     }
+//   }
+// }
+
+// @media (max-width: 900px) {
+//   .fortnightly-sheet .sheet-body {
+//     flex-direction: column;
+//   }
+// }
+
+
+
+
+.fortnightly-sheet {
+  display: flex;
+  padding-bottom: 20px;
+  flex-direction: column;
+
+
+
+
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0px 0px 30px 0px #00000033;
+  box-sizing: border-box;
+  overflow: hidden;
+
+
+  .fps-header-wrapper {
+    display: flex;
+    padding: 0px 20px;
+
+
+    flex-direction: row;
+    align-items: flex-start;
+
+
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    padding-bottom: 10px;
+  }
+
+
+  .fps-header {
+    display: flex;
+    padding: 20px 20px 0px 20px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+
+
+   
+
+
+    h2 {
+      margin: 10px 0px;
+    }
+  }
+
+
+  .fortnight-input {
+    width: 80px !important;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .fortnight-input-custom-styles{
+    text-align: center !important;
+  }
+
+
+  /* BODY SCROLLS ONLY WHEN REQUIRED */
+  .sheet-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    margin-top: 20px;
+    padding: 0px 20px;
+
+
+    display: flex;
+    gap: 36px;
+  }
+
+
+  .sheet-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+
+  .sheet-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+
+  .row-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+
+  .row-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+  }
+
+
+  .value-label {
+    font-weight: 500;
+    font-size: 13px;
+    color: black;
+  }
+
+
+  .rating-text {
+    font-weight: 500;
+    color: black;
+    font-size: 0.9em;
+  }
+
+
+  .sheet-footer {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    background: #fff;
+  }
+
+
+  .submit-btn {
+    background: var(--color-primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    width:auto;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+
+@media (max-width: 900px) {
+  .fortnightly-sheet .sheet-body {
+    flex-direction: column;
+  }
+}

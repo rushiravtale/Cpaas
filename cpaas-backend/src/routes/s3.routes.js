@@ -1,0 +1,22 @@
+const { Router } = require("express");
+const router = Router();
+const s3Controller = require('../controllers/s3.controller');
+const s3Helper  = require('../helpers/s3.helper');
+
+router.post('/add',s3Controller.addToCollection);
+router.patch('/archive',s3Controller.archiveEntry);
+router.get('/list',s3Controller.listMasterFiles);
+router.get('/s3List',s3Controller.listFiles);
+router.get('/getInfo',s3Controller.getInfo);
+router.post('/upload',s3Controller.uploadFile);
+router.get('/download',s3Controller.downloadFile);
+router.post('/requestDownload',s3Controller.addRequest);
+router.post('/abortMulti',s3Controller.abortMultiUpload);
+router.post('/completeMulti',s3Controller.completeMultiUpload);
+router.delete('/deleteFile',s3Controller.deleteFile);
+router.get('/multiDownload',s3Controller.multiDownloadFiles);
+router.get('/testDownload',s3Helper.getDownloadUrl);
+router.get('/queuePending',s3Controller.queuePending);
+router.get('/fetchRequests',s3Controller.fetchRequests);
+router.delete('/deleteRequests',s3Controller.deleteRequests);
+module.exports = router;

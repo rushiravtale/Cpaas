@@ -1,0 +1,685 @@
+.pen-card {
+  h2 {
+    margin: 0;
+    padding: 10px;
+    background-color: #666;
+    text-align: center;
+  }
+}
+
+.certificate-header {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  h2 {
+    margin: 10px 0px;
+  }
+
+  .cert-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.certificate-page-wrapper {
+  background: #f5f7fb;
+  width: 100%;
+  box-sizing: border-box;
+
+  .download-pdf-button {
+    background: #0049d0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #003399;
+    }
+
+    &:active {
+      background: #002266;
+    }
+  }
+
+  .cert-actions {
+    text-align: right;
+    margin-bottom: 12px;
+
+    .btn {
+      background: #0049d0;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-left: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  }
+
+  .certificate-canvas {
+    display: flex;
+    justify-content: center;
+  }
+
+  .certificate-wrapper {
+    border: 20px solid #0b5ed7; /* BLUE BORDER - Increased thickness */
+    box-sizing: border-box;
+    background: #ffffff;
+  }
+
+  .certificate-inner {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 50px 80px;
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
+
+  .cert-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+
+    .cert-logo-left,
+    .cert-logo-right {
+      max-width: 120px;
+      box-sizing: border-box;
+      margin-top: 20px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+
+    .cert-title {
+      text-align: center;
+      margin-top: -20px;
+      flex: 1;
+    }
+  }
+
+  .cert-basic-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    margin-top: 25px;
+
+    .info-left,
+    .info-right {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+
+      .info-row {
+        display: flex;
+        margin: 0;
+        .label {
+          width: 150px;
+          font-size: 15px !important;
+          font-weight: 800;
+        }
+        .value {
+          color: #222;
+        }
+      }
+    }
+  }
+
+  .cert-top-charts {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 18px;
+
+    .chart-card {
+      flex: 1 0;
+      display: flex;
+      background-color: #f9f9f9;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #cccccc;
+      padding: 12px;
+      gap: 10px;
+      height: 165px !important;
+
+      h4 {
+        text-align: center;
+        height: 20%;
+        margin: 0px !important;
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        color: #5d5157;
+      }
+
+      .chart-inner {
+        display: flex;
+        position: relative;
+        height: 80%;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+
+        gap: 12px;
+
+        .mini-bars-wrapper {
+          gap: 60px !important;
+        }
+
+        .circ-wrapper {
+          width: 80px;
+          height: 80px;
+          position: relative;
+        }
+        .circ-sub {
+          text-align: center;
+          font-size: 12px;
+          margin-top: -38px;
+          color: #666;
+        }
+        .chart-grade {
+          text-align: center;
+          font-weight: 700;
+          color: #0049d0;
+          width: 100%;
+        }
+        .gauge-area {
+          width: 140px;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  .cert-fortnightly {
+    border: 2px solid #cccccc;
+    padding: 14px 14px 0px 14px;
+    margin-bottom: 0px;
+    background: #fafafa;
+
+    .cert-fortnightly-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 30px; // gap between title and legend boxes
+
+      .fort-title {
+        font-weight: 700;
+        color: #5d5157;
+        margin: 0;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px; // smaller font for legend
+      }
+
+      .legend-box {
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        border-radius: 2px;
+      }
+
+      .fort-fail {
+        background: #e53935;
+      }
+      .fort-below-average {
+        background: #ff8c00;
+      }
+      .fort-average {
+        background: #c69c2b;
+      }
+      .fort-above-average {
+        background: #0049d0;
+      }
+      // Keeping these for backward compatibility if needed, or removing if strictly replacing
+      .fort-low {
+        background: #e53935;
+      }
+      .fort-excellent {
+        background: #0049d0;
+      }
+    }
+
+    .fort-chart-wrap {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      padding: 6px 0;
+
+      .barChart {
+        width: 100% !important;
+        height: 40% !important;
+      }
+    }
+  }
+
+  .cert-bottom-grid {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    align-items: flex-start;
+
+    .cert-left-column {
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .cert-box {
+        border: 2px solid #cccccc;
+        padding: 14px;
+        background: #f9f9f9;
+
+        h4 {
+          display: flex;
+          margin-top: 0;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .pf-grid {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .pf-label {
+        font-weight: 400;
+        color: #444;
+        margin-bottom: 6px;
+      }
+
+      .pf-value {
+        // color: #0049D0;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .theoretical .theo-item {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+      }
+
+      .theo-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 8px;
+        align-items: center;
+
+        .theo-value {
+          font-weight: bold;
+          font-size: 14px;
+        }
+      }
+
+      .practical-box {
+        text-align: center;
+        font-weight: 700;
+        padding: 22px 0;
+      }
+
+      .overall-box .overall-grid {
+        display: flex;
+        justify-content: space-around;
+        gap: 8px;
+        align-items: center;
+      }
+      .overall-box {
+        h3 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .overall-wrapper {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+        }
+      }
+
+      .small-label {
+        color: black;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .small-value {
+        font-weight: 700;
+        color: #222;
+        margin-top: 6px;
+      }
+    }
+
+    .cert-right-column {
+      width: 45%;
+      box-sizing: border-box;
+
+      .pen-picture-container {
+        border: 2px solid #cccccc;
+        background: #f0f0f0;
+        box-sizing: border-box;
+        width: 100%;
+
+        h2 {
+          margin: 0px !important;
+          text-align: center;
+          padding: 10px;
+          background-color: #cccccc;
+          color: #000;
+          font-weight: 700;
+        }
+
+        p {
+          padding: 5px 10px;
+          color: #000;
+        }
+
+        b {
+          // text-decoration: underline !important;
+          font-weight: 700;
+          color: #000;
+        }
+
+        .pen-header {
+          background: #cfcfcf;
+          padding: 10px;
+          font-weight: 700;
+          text-align: center;
+        }
+
+        .pen-content {
+          padding: 0px;
+          color: #000;
+          line-height: 1.5;
+          font-size: 14px;
+        }
+      }
+
+      .commander-actions-wrapper {
+        width: 100%;
+      }
+
+      .pen-edit-section {
+        padding: 14px 0;
+        text-align: center;
+
+        .edit-pen-button {
+          background: #28a745;
+          color: #fff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 13px;
+          transition: background 0.3s ease;
+
+          &:hover {
+            background: #218838;
+          }
+
+          &:active {
+            background: #1e7e34;
+          }
+        }
+      }
+
+      .pen-append-section {
+        padding: 14px;
+        border: 1px solid #ddd;
+        background: #fff;
+        margin-bottom: 12px;
+
+        .append-label {
+          display: block;
+          font-weight: 600;
+          margin-bottom: 8px;
+          color: #333;
+          font-size: 13px;
+        }
+
+        .append-textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 13px;
+          font-family: inherit;
+          resize: vertical;
+          box-sizing: border-box;
+          margin-bottom: 10px;
+
+          &:focus {
+            outline: none;
+            border-color: #0049d0;
+            box-shadow: 0 0 0 2px rgba(0, 73, 208, 0.1);
+          }
+        }
+
+        .append-actions {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+
+          button {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background 0.3s ease;
+          }
+
+          .append-button {
+            background: #0049d0;
+            color: #fff;
+
+            &:hover {
+              background: #003399;
+            }
+
+            &:active {
+              background: #002266;
+            }
+          }
+
+          .reset-button {
+            background: #dc3545;
+            color: #fff;
+
+            &:hover {
+              background: #c82333;
+            }
+
+            &:active {
+              background: #bd2130;
+            }
+          }
+        }
+      }
+
+      .signature-upload-section {
+        padding: 14px 0;
+        text-align: center;
+
+        .upload-signature-button {
+          background: #0049d0;
+          color: #fff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 13px;
+          transition: background 0.3s ease;
+
+          &:hover {
+            background: #003399;
+          }
+
+          &:active {
+            background: #002266;
+          }
+        }
+      }
+
+      .signature-display {
+        padding: 14px 0;
+        text-align: center;
+
+        .signature-image {
+          max-width: 200px;
+          max-height: 100px;
+          object-fit: contain;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          padding: 4px;
+          background: #fff;
+        }
+      }
+
+      // Pen Picture Category Styles - Removed as per new uniform grey design requirements
+      // .pen-category-excellent, .pen-category-average etc. are no longer distinct in styling.
+      .pen-category-excellent,
+      .pen-category-average,
+      .pen-category-belowAverage,
+      .pen-category-fail {
+        .pen-picture-container {
+          background: #f0f0f0 !important;
+
+          .pen-content h2 {
+            background-color: #cccccc !important;
+            color: #000 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+  .certificate-inner {
+    width: 95%;
+    padding: 18px;
+  }
+
+  .cert-top-charts,
+  .cert-bottom-grid {
+    flex-direction: column;
+  }
+
+  .cert-left-column,
+  .cert-right-column {
+    width: 100%;
+  }
+}
+
+.theo-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.practical-value {
+  font-weight: 400 !important;
+}
+
+.pf-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.theo-label {
+  font-size: 14px;
+}
+
+/* COMPLETELY REMOVE BLACK FOCUS BORDER ON HOVER/CLICK */
+.recharts-wrapper,
+.recharts-surface,
+.recharts-layer,
+.recharts-bar-rectangles,
+.recharts-responsive-container {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  &:focus {
+    outline: none !important;
+  }
+}
+
+.recharts-layer .recharts-bar-rectangles {
+  &:focus {
+    outline: none !important;
+  }
+}
+
+/* Remove any default focus ring when clicking inside chart */
+.recharts-wrapper:focus,
+.recharts-wrapper:focus-visible,
+.recharts-surface:focus {
+  outline: none !important;
+}
+
+.fort-chart-wrap svg *:focus {
+  outline: none !important;
+  stroke: none !important;
+}
+
+.cert-fortnightly-wrapper {
+  position: relative;
+  padding-top: 5px;
+  margin-bottom: 20px;
+}
+
+.fort-title {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-weight: 700;
+  color: #5d5157;
+  white-space: nowrap;
+}
+
+.legend-container {
+  display: flex;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.chart-circle-subtext {
+  position: absolute !important;
+  margin-top: 55px !important;
+  text-align: center;
+  width: 100%;
+  font-size: 13px;
+  color: #666;
+}

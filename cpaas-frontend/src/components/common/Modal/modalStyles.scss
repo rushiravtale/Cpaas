@@ -1,0 +1,77 @@
+.custom-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.custom-modal-container {
+  background: #fff;
+  width: 360px;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.custom-modal-header {
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e5e5;
+
+  h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+.custom-modal-body {
+  font-size: 0.9rem;
+  padding: 0.5rem 0 1rem 0;
+}
+
+.custom-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+/* ButtonControl overrides */
+.modal-confirm-btn {
+    padding:10px;
+    font-size: 0.9rem;
+
+  background: #959978!important;
+  color: white !important;
+}
+
+.modal-confirm-btn:hover {
+  background: #828851 !important;
+}
+
+.modal-cancel-btn {
+    font-size: 0.9rem;
+
+    padding:10px;
+  background: #e0e0e0 !important;
+  color: black !important;
+}
+
+.modal-cancel-btn:hover {
+  background: #cfcfcf !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,49 @@
+@use "./styles/__variables.scss" as *;
+
+body {
+  font-family: "Poppins";
+
+  box-sizing: border-box;
+  height:100vh !important;
+  background-color: #F5F7FA;
+  margin: 0;
+}
+#root{
+height:100% !important;
+
+}
+
+* {
+  scrollbar-width: thin;         
+  scrollbar-color: #bcbcbc #f0f0f0;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;                   
+}
+
+*::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #bcbcbc;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.rnc__notification-content 
+{
+  z-index: 99999 !important;
+}

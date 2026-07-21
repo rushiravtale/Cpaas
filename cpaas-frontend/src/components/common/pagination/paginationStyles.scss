@@ -1,0 +1,112 @@
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1rem;
+  color: #000;
+  font-size: 12px; 
+
+  .rows-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: inherit;
+    font-weight: 500;
+    color: inherit;
+
+    .rows-select {
+      select {
+        padding: 6px 10px;
+        font-size: inherit;
+        font-weight: 500;
+        border-radius: 6px;
+        border: 1px solid #6f7254;
+        background: #fff;
+        color: #000;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #f3f3f3;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: #8A8E69;
+        }
+      }
+    }
+
+    .rows-text {
+      white-space: nowrap;
+      font-size: inherit;
+    }
+  }
+
+  .pagination-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+
+    .dots {
+    padding: 6px 12px;
+    font-size: inherit;
+    color: #000;
+    opacity: 0.7;
+  }
+
+    
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      font-size: inherit;
+      font-weight: 500;
+      border: 1px solid #6f7254;
+      border-radius: 6px;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+      min-width: 36px;
+      transition: all 0.25s ease;
+
+      &:hover:not(:disabled):not(.active) {
+        background: #eaeaea;
+        transform: scale(1.05);
+      }
+
+      &.active {
+        background: #8A8E69;
+        color: #fff;
+        border-color: #6f7254;
+        font-weight: 600;
+        transform: scale(1.08);
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      svg {
+        font-size: 14px;
+      }
+    }
+
+    .nav-button {
+      background: #fff;
+      border: 1px solid #6f7254;
+      font-weight: 600;
+      color: #000;
+
+      &:hover:not(:disabled) {
+        background: #eaeaea;
+      }
+    }
+  }
+}

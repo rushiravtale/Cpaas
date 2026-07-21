@@ -1,0 +1,242 @@
+.driver-tech-phase-page {
+  padding: 20px;
+  background: #fff;
+  box-sizing: border-box;
+
+
+  // height: 100%;
+  box-shadow: 0px 0px 30px 0px #00000033;
+  // overflow-y: auto;
+  border-radius: var(--radius-lg);
+}
+
+
+.gtp-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  h2{
+    margin: 15px 0px;
+  }
+}
+
+
+.gtp-back-icon {
+  cursor: pointer;
+  background-color: #d9d9d9;
+  border-radius: 100%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* INFO CARD */
+.driver-tech-phase-info-card {
+  background: #eaf7ee;
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+.driver-tech-phase-info-left,
+.driver-tech-phase-info-center,
+.driver-tech-phase-info-right {
+  flex: 1;
+}
+.driver-tech-phase-info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+.driver-tech-phase-info-label {
+  font-weight: 700;
+  color: #222;
+}
+.driver-tech-phase-info-value {
+  color: #111;
+}
+
+
+/* PRACTICAL CARD */
+.driver-tech-phase-card {
+  background: #f4f7f9;
+  padding: 18px;
+  border-radius: 8px;
+}
+
+
+.driver-tech-phase-practical-card {
+  margin-bottom: 24px;
+}
+
+
+.driver-tech-phase-practical-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+
+.driver-tech-phase-small-card {
+  background: #eef3f6;
+  border-radius: 8px;
+  padding: 14px;
+}
+.driver-tech-phase-small-card-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+.driver-tech-phase-small-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+
+
+
+.driver-tech-phase-numeric-label {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+
+.driver-tech-phase-numeric-input {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.driver-tech-phase-input-narrow .input-box {
+  width: 80px !important;    
+}
+.driver-tech-phase-input-narrow{
+  width: auto;
+margin-bottom: 0px !important;
+}
+
+
+.driver-tech-phase-max-inline {
+  display: flex;
+  align-items: center;
+  font-size: 13px !important;
+  min-width: 40px;            /* fixed alignment */
+  justify-content: flex-start;
+}
+.driver-tech-phase-max-inline span,
+.driver-tech-phase-max-inline p {
+  font-size: 13px !important;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+
+/* Restrictive Quality */
+.driver-tech-phase-restrictive-card {
+  margin-top: 20px;
+}
+
+
+/* SUBMIT BUTTON */
+.driver-tech-phase-submit-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+  margin-bottom: 40px;
+}
+.driver-tech-phase-submit-btn {
+  min-width: 110px;
+  background: #4b5e29;
+  color: #fff;
+  font-family: inherit;
+  border-radius: var(--radius-md);
+  padding: 12px 0px;
+}
+
+
+.driver-input-control-wrapper
+{
+  margin-bottom: 0px !important;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .driver-tech-phase-practical-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+ 
+}
+
+
+
+/* THEORETICAL TEST */
+.driver-tech-phase-theoretical-card {
+  /* Optional: style for the theoretical card */
+}
+
+.driver-tech-phase-two-col {
+  display: flex;
+  justify-content: flex-start;
+  gap: 50px;
+}
+
+.driver-tech-phase-inline-field {
+  display: flex;
+  gap:5px;
+  flex-direction: row;
+  align-items: center;
+}
+
+.driver-tech-phase-inline-field-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-tech-phase-numeric-label-write,
+.driver-tech-phase-numeric-label-quiz {
+  width: 45%;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.driver-tech-phase-input-inline {
+  width: 120px;
+}
+
+.driver-tech-phase-max-inline-write,
+.driver-tech-phase-max-inline-quiz {
+  display: flex;
+  align-items: center;
+  margin-top: 14px !important;
+  color: #333;
+  font-size: 13px !important;
+
+  span, p {
+    font-size: 13px !important;
+    font-weight: 500;
+    margin-left: 2px;
+  }
+}
+
+
+.driver-tech-phase-test-row{
+  margin-bottom: 24px ;
+}

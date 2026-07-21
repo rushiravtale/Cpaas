@@ -1,0 +1,144 @@
+.trade-list-container {
+  border-radius: var(--radius-lg);
+  box-sizing: border-box;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 30px 0px #00000033;
+  padding: 0px 20px 20px 20px;
+}
+
+
+.fyNgtQ{
+  justify-content: center !important;
+}
+
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+
+.back-nagivation-wrap
+{
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+  background-color:#D9D9D9 ;
+  border-radius: 25px;
+  span{
+    font-size: 14px;
+  }
+
+
+}
+
+
+// .header-wrapper {
+//      flex-direction: column;
+//     align-items: flex-start;
+   
+//     justify-content: flex-start;
+//   display: flex;
+//   gap: 8px;
+
+
+//   // .back-icon
+//   // {
+
+
+//   // font-size: 20px;
+
+
+//   // }
+
+
+//   h2{
+//   font-weight: 600;
+//   margin :0px;
+//   font-size: 20px;
+
+
+//   }
+// }
+
+
+/* Optional if title needs styling */
+.header-title {
+  font-size: 20px;
+}
+
+
+/* ───── Subtitle ───── */
+
+
+
+.subtitle {
+  font-size: 16px;
+  margin-top: 0px;
+  font-weight: 600;
+
+
+  margin-bottom: 10px;
+}
+
+
+/* ───── Add Button ───── */
+
+
+.su-add-btn {
+  background-color: #8A8E69 !important;
+  color: #fff !important;
+  border-radius: 30px !important;
+  padding: 10px 20px !important;
+  font-size: 14px;
+  display: flex !important;
+  align-items: center !important;
+  margin-top: 0px !important;
+  gap: 8px !important;
+}
+
+
+.su-add-btn:hover {
+  opacity: 0.9;
+}
+
+.export-btn,
+.import-btn {
+  background-color: #6c757d !important;
+  color: #fff !important;
+  border-radius: 30px !important;
+  padding: 10px 20px !important;
+  font-size: 14px;
+  display: flex !important;
+  align-items: center !important;
+  margin-top: 0px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.export-btn:hover,
+.import-btn:hover {
+  background-color: #5a6268 !important;
+  opacity: 0.9;
+}
+
+
+
+
+
+
+.btn-icon,
+.menu-icon {
+  width: 18px;
+  height: 18px;
+}
