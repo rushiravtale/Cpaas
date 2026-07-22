@@ -1181,17 +1181,15 @@ export default class Api {
         // }
 
 
-        if (resp?.rid === "e-agniveer-7") {
-  // force this specific RID into catch block
-  throw {
-    rid: resp.rid,
-    message: resp.message,
-    data: resp.data,
-    status: response.status,
-  };
-}
-
-if (resp?.rid.startsWith("e-")) {
+        if (resp?.rid.startsWith("e-")) {
+  if (resp.rid === "e-agniveer-7" || !handleFormError) {
+    throw {
+      rid: resp.rid,
+      message: resp.message,
+      data: resp.data,
+      status: response.status,
+    };
+  }
   if (handleFormError && resp.message) {
     Api.alert({ title: "Error", text: resp.message });
   }

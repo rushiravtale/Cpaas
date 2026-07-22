@@ -6,6 +6,7 @@ const {
   getTradeCodeFromName,
   COLUMN_MAP,
   PRACTICAL_COLUMNS,
+  FORTNIGHTLY_FIELDS,
 } = require("./tradeTemplateMap");
 
 const c = COLUMN_MAP.common;
@@ -58,7 +59,7 @@ exports.exportAgniveersToExcelByTrade = async (
   tradeCode,
   options = {},
 ) => {
-  const { course, physicalMap = new Map(), techPhaseMap = new Map() } = options;
+  const { course, physicalMap = new Map(), techPhaseMap = new Map(), fortnightlyMap = new Map() } = options;
   const templatePath = getTemplatePath(tradeCode);
   const pracCols = PRACTICAL_COLUMNS[tradeCode];
   if (!pracCols) {
@@ -115,6 +116,47 @@ exports.exportAgniveersToExcelByTrade = async (
     if (cell.value === "." || cell.value === "．") {
       cell.value = "";
     }
+  }
+
+  // Write Fortnightly Performance column headers — merged exactly like PRACTICAL section
+  if (pracCols.fortnightlyStart != null) {
+    const fnStartCol = pracCols.fortnightlyStart + 1; // ExcelJS 1-based
+    const fnEndCol = fnStartCol + FORTNIGHTLY_FIELDS.length - 1;
+    const lastHeaderRow = dataStartRow - 1; // row 5 for all trades
+    const sectionEndRow = lastHeaderRow - 2; // row 3 — same depth as PRACTICAL merge
+    const subGroupRow = lastHeaderRow - 1;  // row 4 — where PKT PH / EQPT PH live
+
+    const sectionStyle = {
+      font: { size: 11, color: { theme: 1 }, name: "Calibri", family: 2, scheme: "minor" },
+      border: { left: { style: "thin" }, right: { style: "thin" }, top: { style: "thin" }, bottom: { style: "thin" } },
+      fill: { type: "pattern", pattern: "none" },
+      alignment: { horizontal: "center", vertical: "middle", wrapText: true },
+    };
+    const labelStyle = {
+      font: { size: 8, color: { argb: "FF000000" }, name: "Poppins" },
+      border: { left: { style: "thin" }, right: { style: "thin" }, top: { style: "thin" }, bottom: { style: "thin" } },
+      fill: { type: "pattern", pattern: "none" },
+      alignment: { horizontal: "center", vertical: "middle", wrapText: true },
+    };
+
+    // Rows 1-3: merge across all FN cols (mirrors PRACTICAL section header)
+    try { worksheet.mergeCells(1, fnStartCol, sectionEndRow, fnEndCol); } catch (_) {}
+    const sectionCell = worksheet.getCell(1, fnStartCol);
+    sectionCell.value = "FORTNIGHTLY PERFORMANCE";
+    sectionCell.style = sectionStyle;
+
+    // Row 4: merge across all FN cols — empty (no sub-groups for fortnightly)
+    try { worksheet.mergeCells(subGroupRow, fnStartCol, subGroupRow, fnEndCol); } catch (_) {}
+    const subGroupCell = worksheet.getCell(subGroupRow, fnStartCol);
+    subGroupCell.value = "";
+    subGroupCell.style = sectionStyle;
+
+    // Row 5 (lastHeaderRow): individual column labels
+    FORTNIGHTLY_FIELDS.forEach((field, i) => {
+      const cell = worksheet.getCell(lastHeaderRow, fnStartCol + i);
+      cell.value = field.label;
+      cell.style = labelStyle;
+    });
   }
 
   let rowIndex = dataStartRow;
@@ -193,6 +235,23 @@ exports.exportAgniveersToExcelByTrade = async (
     // Practical - trade-specific
     fillPracticalCells(row, techPhase, tradeCode, pracCols);
 
+    // Fortnightly Performance
+    if (pracCols.fortnightlyStart != null) {
+      const fortnightly = fortnightlyMap.get(key);
+      if (fortnightly) {
+        const fnStartCol = pracCols.fortnightlyStart + 1; // ExcelJS 1-based
+        FORTNIGHTLY_FIELDS.forEach((field, i) => {
+          let val = "";
+          if (field.key === "total") {
+            val = fortnightly.totalFortnightPerformance ?? "";
+          } else {
+            val = fortnightly[field.key]?.score ?? "";
+          }
+          row.getCell(fnStartCol + i).value = val;
+        });
+      }
+    }
+
     rowIndex++;
   }
 
@@ -211,10 +270,10 @@ exports.exportAgniveersToExcelByTrade = async (
   return Buffer.from(buffer);
 };
 
-/** Get max column count (1-based) for each trade */
+/** Get max column count (1-based) for each trade — includes 11 fortnightly cols */
 function getMaxColumnCount(tradeCode) {
-  const counts = { DVR: 40, GUN: 41, OFC: 43, OPR: 43 };
-  return counts[tradeCode] || 43;
+  const counts = { DVR: 51, GUN: 52, OFC: 54, OPR: 54 };
+  return counts[tradeCode] || 54;
 }
 
 /** Apply bolder vertical borders to the data region (column separators) */
@@ -461,8 +520,10 @@ exports.parseExcelFileByTrade = (fileBuffer, tradeCode) => {
     for (let r = dataStartRow; r < aoa.length; r++) {
       const row = aoa[r];
       if (!Array.isArray(row)) continue;
-      const armyNo = (row[c.ARMY_NO] ?? "").toString().trim();
-      if (!armyNo) continue;
+      const hasContent = row.some(
+        (cell) => cell !== null && cell !== undefined && cell.toString().trim() !== ""
+      );
+      if (!hasContent) continue;
       rows.push({ rowIndex: r + 1, data: row });
     }
     return { rows, headers: aoa.slice(0, dataStartRow) };
@@ -568,7 +629,7 @@ exports.convertRowToAgniveerAndRelated = (rowData, tradeCode, tradeId, courseId)
     practical: buildPracticalFromRow(rowData, tradeCode),
   };
 
-  return { agniveer, physical, techPhase };
+  return { agniveer, physical, techPhase, fortnightly: buildFortnightlyFromRow(rowData, tradeCode) };
 };
 
 function buildPracticalFromRow(rowData, tradeCode) {
@@ -681,6 +742,46 @@ function buildPracticalFromRow(rowData, tradeCode) {
     default:
       return {};
   }
+}
+
+function buildFortnightlyFromRow(rowData, tradeCode) {
+  const pracCols = PRACTICAL_COLUMNS[tradeCode];
+  if (!pracCols || pracCols.fortnightlyStart == null) return null;
+  const n = (col) => {
+    const val = rowData[col];
+    if (val === undefined || val === null || val === "") return null;
+    const num = Number(val);
+    return isNaN(num) ? null : num;
+  };
+  const fs = pracCols.fortnightlyStart;
+  const scores = {
+    physicalTraining: n(fs),
+    gamesPerformance: n(fs + 1),
+    motivationLevel: n(fs + 2),
+    militaryBearing: n(fs + 3),
+    situationalAwareness: n(fs + 4),
+    classPerformance: n(fs + 5),
+    morale: n(fs + 6),
+    decisionMaking: n(fs + 7),
+    resilience: n(fs + 8),
+    integrity: n(fs + 9),
+  };
+  const total = n(fs + 10);
+  if (Object.values(scores).every((s) => s === null)) return null;
+  const computedTotal = total ?? Object.values(scores).reduce((a, b) => a + (b || 0), 0);
+  return {
+    physicalTraining: { score: scores.physicalTraining },
+    gamesPerformance: { score: scores.gamesPerformance },
+    motivationLevel: { score: scores.motivationLevel },
+    militaryBearing: { score: scores.militaryBearing },
+    situationalAwareness: { score: scores.situationalAwareness },
+    classPerformance: { score: scores.classPerformance },
+    morale: { score: scores.morale },
+    decisionMaking: { score: scores.decisionMaking },
+    resilience: { score: scores.resilience },
+    integrity: { score: scores.integrity },
+    totalFortnightPerformance: computedTotal,
+  };
 }
 
 /**

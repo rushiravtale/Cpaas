@@ -88,6 +88,7 @@ const COLUMN_MAP = {
 const PRACTICAL_COLUMNS = {
   DVR: {
     dataStartRow: 5,
+    fortnightlyStart: 40,
     // practTest1, smlTest, practTest2, drivingTest
     idenOfParts: 27, // practTest1
     sysTraceOut: 28,
@@ -105,6 +106,7 @@ const PRACTICAL_COLUMNS = {
   },
   GUN: {
     dataStartRow: 5, // GUN has 6 header rows
+    fortnightlyStart: 41,
     // pkt, eqptph, gunph, mslph, ims, fdfiring
     pktSa: 27,
     pktIdenOfParts: 28,
@@ -123,6 +125,7 @@ const PRACTICAL_COLUMNS = {
   },
   OFC: {
     dataStartRow: 5,
+    fortnightlyStart: 43,
     // rscnr900m, rsStarsVMk2, dch, rtProc, bfsr, misc
     clrMode: 27,
     secMode: 28,
@@ -143,6 +146,7 @@ const PRACTICAL_COLUMNS = {
   },
   OPR: {
     dataStartRow: 5,
+    fortnightlyStart: 43,
     // rscnr100, rsStarsVMk, dch, rtProc, rsVrc, byt, misc
     clrMode: 27,
     secMode: 28,
@@ -164,6 +168,23 @@ const PRACTICAL_COLUMNS = {
 };
 
 /**
+ * Fortnightly Performance fields in export order (score extracted per field, total at end)
+ */
+const FORTNIGHTLY_FIELDS = [
+  { key: "physicalTraining", label: "Phy Trg" },
+  { key: "gamesPerformance", label: "Games" },
+  { key: "motivationLevel", label: "Motivation" },
+  { key: "militaryBearing", label: "Mil Bearing" },
+  { key: "situationalAwareness", label: "Sit Awareness" },
+  { key: "classPerformance", label: "Class Perf" },
+  { key: "morale", label: "Morale" },
+  { key: "decisionMaking", label: "Decision Making" },
+  { key: "resilience", label: "Resilience" },
+  { key: "integrity", label: "Integrity" },
+  { key: "total", label: "Total" },
+];
+
+/**
  * Tech phase model name per trade
  */
 const TECH_PHASE_MODEL = {
@@ -179,5 +200,6 @@ module.exports = {
   getTradeCodeFromName,
   COLUMN_MAP,
   PRACTICAL_COLUMNS,
+  FORTNIGHTLY_FIELDS,
   TECH_PHASE_MODEL,
 };

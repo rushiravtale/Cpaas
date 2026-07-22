@@ -1385,9 +1385,10 @@ const exportAgniveers = async (req, res) => {
       }
     }
 
-    // Fetch PhyscialProficiency and TechPhase for each agniveer+course
+    // Fetch PhyscialProficiency, TechPhase, and FortNightProficiency for each agniveer+course
     const physicalMap = new Map();
     const techPhaseMap = new Map();
+    const fortnightlyMap = new Map();
     const TechPhaseModel = {
       DVR: DriverTechPhase,
       GUN: GunnerTechPhase,
@@ -1399,7 +1400,7 @@ const exportAgniveers = async (req, res) => {
       const courseIds = (ag.courseName || []).map((c) => c?._id || c);
       for (const cid of courseIds) {
         const key = `${ag._id}_${cid}`;
-        const [physical, techPhase] = await Promise.all([
+        const [physical, techPhase, fortnightly] = await Promise.all([
           PhyscialProficiency.findOne({
             agniveerId: ag._id,
             courseId: cid,
@@ -1410,9 +1411,14 @@ const exportAgniveers = async (req, res) => {
                 courseId: cid,
               })
             : Promise.resolve(null),
+          FortNightProficiency.findOne({
+            agniveerId: ag._id,
+            courseId: cid,
+          }).sort({ createdAt: -1 }),
         ]);
         if (physical) physicalMap.set(key, physical);
         if (techPhase) techPhaseMap.set(key, techPhase);
+        if (fortnightly) fortnightlyMap.set(key, fortnightly);
       }
     }
 
@@ -1426,6 +1432,7 @@ const exportAgniveers = async (req, res) => {
         course: courseForMeta || undefined,
         physicalMap,
         techPhaseMap,
+        fortnightlyMap,
       },
     );
 
@@ -1518,8 +1525,19 @@ const importAgniveers = async (req, res) => {
 
     const { rows } = parseResult;
     if (!rows || rows.length === 0) {
-      responseJSON["rid"] = "e-agniveer-10";
-      responseJSON["data"] = { message: "Excel file has no data rows" };
+      responseJSON["rid"] = "e-agniveer-12";
+      responseJSON["data"] = {
+        errors: [
+          {
+            row: "-",
+            field: "ARMY NO",
+            message:
+              "No data rows found. All rows appear to have empty Army Numbers or the sheet is blank.",
+            data: [],
+          },
+        ],
+        results: { created: 0, updated: 0, failed: 0 },
+      };
       return sendResponse(responseJSON, res);
     }
 
@@ -1578,6 +1596,7 @@ const importAgniveers = async (req, res) => {
           agniveer: agniveerData,
           physical,
           techPhase,
+          fortnightly,
         } = excelHelper.convertRowToAgniveerAndRelated(
           data,
           tradeCode,
@@ -1691,6 +1710,14 @@ const importAgniveers = async (req, res) => {
               anyTechPhaseUpdated = true;
             }
           }
+        }
+
+        if (agniveerId && fortnightly) {
+          await FortNightProficiency.findOneAndUpdate(
+            { agniveerId, courseId },
+            { $set: { ...fortnightly, agniveerId, courseId } },
+            { upsert: true, new: true },
+          );
         }
       } catch (error) {
         results.failed++;

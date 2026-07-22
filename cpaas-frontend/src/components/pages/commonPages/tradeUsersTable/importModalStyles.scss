@@ -86,6 +86,21 @@
     }
   }
 
+  .file-input-error {
+    border-color: #dc3545 !important;
+    background: #fff8f8;
+  }
+
+  .file-error-message {
+    margin-top: 0.5rem;
+    color: #dc3545;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
   .file-info {
     margin-top: 0.5rem;
     display: flex;
@@ -127,54 +142,139 @@
 }
 
 .errors-section {
-  h5 {
-    margin: 0 0 1rem 0;
-    color: #721c24;
-  }
-
-  .errors-table-container {
-    max-height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  .errors-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 1rem;
+
+    .errors-icon {
+      font-size: 1.1rem;
+      color: #dc3545;
+    }
+
+    h5 {
+      margin: 0;
+      color: #721c24;
+      font-size: 0.95rem;
+    }
   }
 
-  .errors-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
+  .error-groups-container {
+    max-height: 340px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding-right: 2px;
+  }
 
-    thead {
-      background: #f8f9fa;
-      position: sticky;
-      top: 0;
-      z-index: 1;
+  .error-row-group {
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    background: #fff8f8;
+    overflow: hidden;
 
-      th {
-        padding: 0.75rem;
-        text-align: left;
-        font-weight: 600;
-        border-bottom: 2px solid #dee2e6;
-      }
+    &.error-row-group--no-id {
+      border-color: #ffc107;
+      background: #fffdf4;
     }
 
-    tbody {
-      tr {
-        &:nth-child(even) {
-          background: #f8f9fa;
-        }
+    &.error-row-group--file {
+      border-color: #b8daff;
+      background: #f0f7ff;
+    }
+  }
 
-        &:hover {
-          background: #e9ecef;
-        }
-      }
+  .error-row-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 0.75rem;
+    background: #fce8ea;
+    border-bottom: 1px solid #f5c6cb;
 
-      td {
-        padding: 0.75rem;
-        border-bottom: 1px solid #dee2e6;
+    .error-row-group--no-id & {
+      background: #fff3cd;
+      border-bottom-color: #ffc107;
+    }
+
+    .error-row-group--file & {
+      background: #cce5ff;
+      border-bottom-color: #b8daff;
+    }
+  }
+
+  .error-row-badge {
+    background: #dc3545;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+
+    .error-row-group--no-id & {
+      background: #d39e00;
+    }
+
+    &.error-row-badge--file {
+      background: #0069d9;
+    }
+  }
+
+  .error-soldier-id {
+    font-size: 0.88rem;
+    color: #495057;
+
+    strong {
+      color: #212529;
+    }
+  }
+
+  .error-soldier-unknown {
+    font-size: 0.82rem;
+    color: #856404;
+    font-style: italic;
+  }
+
+  .error-row-details {
+    margin: 0;
+    padding: 0.4rem 0.75rem 0.5rem 0.75rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+
+      &::before {
+        content: "•";
+        color: #dc3545;
+        font-weight: 700;
+        flex-shrink: 0;
       }
     }
+  }
+
+  .error-field-tag {
+    background: #e9ecef;
+    color: #495057;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    font-family: monospace;
+  }
+
+  .error-msg-text {
+    color: #721c24;
   }
 
   .result-summary {

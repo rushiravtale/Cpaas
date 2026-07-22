@@ -446,7 +446,9 @@ export const importAgniveers = (file, tradeIdOrOnComplete, onComplete) => {
           payload: error.response?.data || error,
         });
 
-        const errorData = error.response?.data?.data || error.data || {};
+        // sendResponse passes the whole responseJSON as `data`, so the actual
+        // payload is one level deeper: error.data.data (not error.data)
+        const errorData = error.response?.data?.data || error.data?.data || error.data || {};
         const errors = errorData.errors || [];
 
         if (errors.length > 0) {
@@ -454,14 +456,26 @@ export const importAgniveers = (file, tradeIdOrOnComplete, onComplete) => {
             callback({ errors, errorData });
           }
         } else {
-          dispatch(
-            showAlert({
-              isOpen: true,
-              title: "Error",
-              type: "danger",
-              msg: error.message || "Failed to import agniveers",
-            }),
-          );
+          const generalMessage =
+            errorData.message ||
+            error.data?.message ||
+            error.message ||
+            "Import failed. Please check the file and try again.";
+          if (typeof callback === "function") {
+            callback({
+              errors: [{ row: "-", field: "FILE ERROR", message: generalMessage, data: null }],
+              errorData,
+            });
+          } else {
+            dispatch(
+              showAlert({
+                isOpen: true,
+                title: "Error",
+                type: "danger",
+                msg: generalMessage,
+              }),
+            );
+          }
         }
       });
   };

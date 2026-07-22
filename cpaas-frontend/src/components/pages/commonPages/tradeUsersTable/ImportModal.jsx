@@ -15,6 +15,7 @@ const ImportModal = ({
   const [file, setFile] = useState(null);
   const [errors, setErrors] = useState([]);
   const [result, setResult] = useState(null);
+  const [fileError, setFileError] = useState("");
   const fileInputRef = useRef(null);
 
   if (!show) return null;
@@ -28,18 +29,21 @@ const ImportModal = ({
         "application/vnd.ms-excel",
       ];
       if (!allowedTypes.includes(selectedFile.type)) {
-        alert("Please select a valid Excel file (.xlsx or .xls)");
+        setFileError("Please select a valid Excel file (.xlsx or .xls)");
+        setFile(null);
         return;
       }
 
       // Validate file size (10MB)
       const maxSize = 10 * 1024 * 1024;
       if (selectedFile.size > maxSize) {
-        alert("File size must be less than 10MB");
+        setFileError("File size must be less than 10MB");
+        setFile(null);
         return;
       }
 
       setFile(selectedFile);
+      setFileError("");
       setErrors([]);
       setResult(null);
     }
@@ -47,9 +51,10 @@ const ImportModal = ({
 
   const handleImport = () => {
     if (!file) {
-      alert("Please select a file to import");
+      setFileError("Please select an Excel file (.xlsx or .xls) to import");
       return;
     }
+    setFileError("");
 
     importAgniveers(file, tradeId, (response) => {
       if (response?.errors) {
@@ -70,6 +75,7 @@ const ImportModal = ({
     setFile(null);
     setErrors([]);
     setResult(null);
+    setFileError("");
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -96,11 +102,16 @@ const ImportModal = ({
                 onChange={handleFileChange}
                 className="file-input"
               />
-              <div className="file-input-display">
+              <div className={`file-input-display ${fileError ? "file-input-error" : ""}`}>
                 {file ? file.name : "Choose Excel file (.xlsx, .xls)"}
               </div>
             </label>
-            {file && (
+            {fileError && (
+              <div className="file-error-message">
+                ⚠ {fileError}
+              </div>
+            )}
+            {file && !fileError && (
               <div className="file-info">
                 <span>File: {file.name}</span>
                 <span>Size: {(file.size / 1024).toFixed(2)} KB</span>
@@ -127,26 +138,60 @@ const ImportModal = ({
 
           {errors.length > 0 && (
             <div className="errors-section">
-              <h5>Import Errors ({errors.length})</h5>
-              <div className="errors-table-container">
-                <table className="errors-table">
-                  <thead>
-                    <tr>
-                      <th>Row</th>
-                      <th>Field</th>
-                      <th>Error</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {errors.map((error, index) => (
-                      <tr key={index}>
-                        <td>{error.row}</td>
-                        <td>{error.field}</td>
-                        <td>{error.message}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="errors-header">
+                <span className="errors-icon">⚠</span>
+                <h5>
+                  Import Failed — {errors.length} error{errors.length !== 1 ? "s" : ""} found. Fix and re-import.
+                </h5>
+              </div>
+              <div className="error-groups-container">
+                {Object.values(
+                  errors.reduce((acc, err) => {
+                    const key = err.row;
+                    if (!acc[key]) acc[key] = { row: err.row, data: err.data, errors: [] };
+                    acc[key].errors.push(err);
+                    return acc;
+                  }, {})
+                ).map((group) => {
+                  const isFileError = group.row === "-";
+                  const armyNo = !isFileError && Array.isArray(group.data)
+                    ? (group.data[4] ?? "").toString().trim()
+                    : "";
+                  const noId = !isFileError && !armyNo;
+                  const groupClass = isFileError
+                    ? "error-row-group error-row-group--file"
+                    : noId
+                    ? "error-row-group error-row-group--no-id"
+                    : "error-row-group";
+                  return (
+                    <div key={group.row} className={groupClass}>
+                      <div className="error-row-header">
+                        {isFileError ? (
+                          <span className="error-row-badge error-row-badge--file">File Error</span>
+                        ) : (
+                          <span className="error-row-badge">Row {group.row}</span>
+                        )}
+                        {!isFileError && (noId ? (
+                          <span className="error-soldier-unknown">
+                            Army No missing — soldier cannot be identified
+                          </span>
+                        ) : (
+                          <span className="error-soldier-id">
+                            Army No: <strong>{armyNo}</strong>
+                          </span>
+                        ))}
+                      </div>
+                      <ul className="error-row-details">
+                        {group.errors.map((err, i) => (
+                          <li key={i}>
+                            <span className="error-field-tag">{err.field}</span>
+                            <span className="error-msg-text">{err.message}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
               </div>
               {result && (
                 <div className="result-summary">
@@ -170,7 +215,7 @@ const ImportModal = ({
             text={importingAgniveers ? "Importing..." : "Import"}
             onClick={handleImport}
             styles="modal-confirm-btn"
-            disabled={!file || importingAgniveers}
+            disabled={importingAgniveers}
           />
         </div>
       </div>
